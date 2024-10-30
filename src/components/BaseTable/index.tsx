@@ -133,7 +133,10 @@ export default function Table() {
         </tfoot>
       </table>
       <div className="h-4" />
-      <button onClick={() => rerender()} className="border p-2">
+      <button
+        onClick={() => rerender()}
+        className="border p-2 text-white bg-sky-500 hover:bg-sky-700 "
+      >
         Re-render
       </button>
     </div>
