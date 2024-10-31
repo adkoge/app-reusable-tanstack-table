@@ -20,3 +20,7 @@ export interface TableHeaderRowProps<TData> {
 export interface HeaderCellProps<TData> {
   header: Header<TData, unknown>;
 }
+
+export interface TableRowProps<TData> {
+  row: Row<TData>;
+}
