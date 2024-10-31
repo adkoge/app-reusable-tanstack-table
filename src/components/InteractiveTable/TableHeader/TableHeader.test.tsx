@@ -194,4 +194,11 @@ describe("TableHeader Component", () => {
     const buttonHeader = screen.getByRole("button", { name: /click me/i });
     expect(buttonHeader).toBeInTheDocument();
   });
+
+  it("renders correct number of HeaderCells in each TableHeaderRow", () => {
+    renderComponent();
+
+    const headerCells = screen.getAllByRole("columnheader");
+    expect(headerCells.length).toBe(mockHeaderGroups[0].headers.length);
+  });
 });
