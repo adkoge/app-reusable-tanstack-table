@@ -42,3 +42,35 @@ export const PaginationButtonWrapperStyled = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+export const SelectContainer = styled.div`
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+`;
+
+export const StyledSelect = styled.select`
+  width: 100%;
+  max-width: 250px;
+  padding: 8px 12px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    border-color: #007bff;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+  }
+
+  &::placeholder {
+    color: #aaa;
+    font-style: italic;
+  }
+`;
