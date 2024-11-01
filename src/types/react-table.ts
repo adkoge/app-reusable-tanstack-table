@@ -24,3 +24,8 @@ export interface HeaderCellProps<TData> {
 export interface TableRowProps<TData> {
   row: Row<TData>;
 }
+
+export interface Option {
+  label: string;
+  value: string;
+}
