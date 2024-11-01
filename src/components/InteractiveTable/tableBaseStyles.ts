@@ -38,3 +38,7 @@ export const PaginationStyled = styled.div`
   margin-bottom: 0;
 `;
 
+export const PaginationButtonWrapperStyled = styled.div`
+  display: flex;
+  justify-content: center;
+`;
