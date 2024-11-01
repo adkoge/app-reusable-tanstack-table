@@ -30,3 +30,11 @@ export const TableCellStyled = styled.td`
     padding-right: 1.5rem;
   }
 `;
+
+export const PaginationStyled = styled.div`
+  color: #a9a9a9;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 0;
+`;
+
