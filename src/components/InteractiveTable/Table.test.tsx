@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Cell, Column, Row, RowModel, Table } from "@tanstack/react-table";
-import TableLayout from ".";
+import TableLayout from "./Views/TableView";
 import { TableProps } from "../../types/react-table";
 
 interface TData {
