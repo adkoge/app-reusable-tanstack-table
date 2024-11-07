@@ -53,7 +53,7 @@ const useTotalEmployeesColumnConfig = (data: EmployeeData[]) => {
         header: () => (
           <span>
             <div className="flex flex-col items-end">
-              <span>Hours Worked This Month</span>
+              <span className="text-left">Hours Worked This Month</span>
             </div>
           </span>
         ),
@@ -72,6 +72,10 @@ const useTotalEmployeesColumnConfig = (data: EmployeeData[]) => {
         accessorKey: "lastPromotionDate",
         displayName: "Last Promotion Date",
         maxSize: 350,
+        meta: {
+          textAlign: "right",
+          flexJustify: "end",
+        },
         header: () => <span>Last Promotion Date</span>,
         cell: (info) => <span>{info.getValue() as string}</span>,
         footer: () => "Last Promotion Date",
