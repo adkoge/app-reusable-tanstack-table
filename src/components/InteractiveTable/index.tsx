@@ -1,90 +1,109 @@
-import TableHeader from "./TableHeader";
-import TableRow from "./TableRow";
-import PaginationText from "./Pagination/PaginationText";
-import PaginationButtons from "./Pagination/PaginationButtons";
-import Filter from "./Filter";
-import { TableProps } from "../../types/react-table";
+import {
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+  Row,
+} from "@tanstack/react-table";
+import { calculateCount } from "./tableHelpers";
+import TableView from "./Views/TableView";
+import { FuzzyFilterMeta, TableProps } from "../../types/react-table";
 
-const TableLayout = <TData extends object>({
+const fuzzyFilter = <TData,>(
+  row: Row<TData>,
+  columnId: string,
+  value: string,
+  addMeta: (meta: FuzzyFilterMeta) => void
+) => {
+  const rowValue = row.getValue(columnId);
+
+  if (typeof rowValue === "string") {
+    const itemRank = rowValue.toLowerCase().includes(value.toLowerCase());
+    addMeta({ itemRank });
+    return itemRank;
+  }
+
+  return false;
+};
+
+const baseTableConfiguration = {
+  columns: [],
+  data: [],
+  debugTable: false, // Change to true when testing
+  defaultColumn: {
+    minSize: 50,
+    maxSize: 400,
+  },
+  getCoreRowModel: getCoreRowModel(),
+  getFilteredRowModel: getFilteredRowModel(),
+  getPaginationRowModel: getPaginationRowModel(),
+  getSortedRowModel: getSortedRowModel(),
+  globalFilterFn: fuzzyFilter,
+  sortDescFirst: true,
+};
+
+const Table = <T extends object>({
+  countKey,
   countTitle,
-  filteredRowCount,
+  enableSearch,
   footerInfo,
+  globalFilter,
   handleColumnFilterChange = () => {},
   handleGlobalFilterChange = () => {},
-  paginationConfig,
+  icon,
   selectConfig,
-  table,
+  paginationConfig,
+  customConfiguration,
   TableSearch,
   title,
-  enableSearch = true,
-}: TableProps<TData>) => {
-  if (!table) return null;
+  tableView = "table",
+  viewLevel,
+}: TableProps<T>) => {
+  const mergedTableConfig = {
+    ...baseTableConfiguration,
+    ...customConfiguration,
+  };
 
-  const pageIndex = paginationConfig?.pageIndex;
-  const pageCount = paginationConfig?.pageCount;
+  const table = useReactTable({
+    ...mergedTableConfig,
+  });
+
+  const pageIndex = table.getState().pagination.pageIndex;
+  const pageCount = table.getPageCount();
+  const filteredRowCount =
+    calculateCount({
+      rows: table.getFilteredRowModel().rows,
+      key: countKey,
+    }) || 0;
 
   return (
-    <div className="flex flex-col">
-      <h1 className="my-3">{title}</h1>
-
-      {enableSearch && (
-        <TableSearch
-          value={table.getState().globalFilter || ""}
-          onChange={handleGlobalFilterChange}
-        />
-      )}
-
-      {selectConfig?.showSelect && (
-        <Filter
-          selectOptions={selectConfig?.selectOptions}
-          selectedOption={selectConfig?.selectedOption}
-          selectPlaceholder={selectConfig?.selectPlaceholder}
-          handleColumnFilterChange={handleColumnFilterChange}
-        />
-      )}
-
-      <div className="mt-6 overflow-x-auto">
-        <table className="w-full">
-          <TableHeader headerGroups={table.getHeaderGroups()} />
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id} row={row} />
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="flex flex-wrap items-center justify-between gap-y-2 mt-4 mb-4 gap-x-4 text-gray-400 text-sm">
-        <div>
-          {filteredRowCount} {countTitle}
-        </div>
-        {footerInfo ? (
-          <a href={footerInfo.link} className="text-blue-500">
-            {footerInfo.text}
-          </a>
-        ) : null}
-
-        {pageIndex !== undefined && pageCount !== undefined && (
-          <>
-            <PaginationText pageIndex={pageIndex} pageCount={pageCount} />
-            <PaginationButtons
-              pageIndex={pageIndex}
-              pageCount={pageCount}
-              onFirstPageClick={() => table.setPageIndex(0)}
-              onLastPageClick={() => table.setPageIndex(pageCount - 1)}
-              onNextPageClick={() => table.nextPage()}
-              onPreviousPageClick={() => table.previousPage()}
-              getCanPreviousPage={table.getCanPreviousPage()}
-              getCanNextPage={table.getCanNextPage()}
-              onPageClick={(page: number) => {
-                table.setPageIndex(page);
-              }}
-            />
-          </>
-        )}
-      </div>
-    </div>
+    <TableView
+      count={filteredRowCount}
+      countKey={countKey}
+      countTitle={countTitle}
+      enableSearch={enableSearch}
+      filteredRowCount={filteredRowCount}
+      footerInfo={footerInfo}
+      globalFilter={globalFilter}
+      handleColumnFilterChange={handleColumnFilterChange}
+      handleGlobalFilterChange={handleGlobalFilterChange}
+      onColumnOrderChange={() => {}}
+      onPaginationChange={() => {}}
+      icon={icon}
+      paginationConfig={
+        paginationConfig
+          ? { ...paginationConfig, pageIndex, pageCount }
+          : undefined
+      }
+      selectConfig={selectConfig}
+      table={table}
+      TableSearch={TableSearch}
+      title={title}
+      tableView={tableView}
+      viewLevel={viewLevel}
+    />
   );
 };
 
-export default TableLayout;
+export default Table;
