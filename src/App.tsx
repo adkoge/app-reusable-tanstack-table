@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BaseTable from "./components/BaseTable";
+import TotalEmployeesTable from "./components/TotalEmployeesTable";
 
 export default function App() {
   const [version, setVersion] = useState("v1");
@@ -23,7 +24,7 @@ export default function App() {
 
       <div className="bg-white p-4 rounded shadow-md">
         {version === "v1" && <BaseTable />}
-        {version === "v2" && "V2 Table"}
+        {version === "v2" && <TotalEmployeesTable />}
       </div>
     </div>
   );

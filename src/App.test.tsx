@@ -15,7 +15,7 @@ describe("App Component", () => {
   it("switches to V2 Table when 'Version 2' button is clicked", () => {
     render(<App />);
     fireEvent.click(screen.getByText("Version 2"));
-    expect(screen.getByText("V2 Table")).toBeInTheDocument();
+    expect(screen.getByText("My Table View")).toBeInTheDocument();
   });
 
   it("switches back to BaseTable (version v1) when 'Version 1' button is clicked", () => {
