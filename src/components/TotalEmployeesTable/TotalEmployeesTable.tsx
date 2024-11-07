@@ -128,7 +128,6 @@ const TotalEmployeesTable = ({ userView = userViewMode.ME }) => {
 
   return (
     <div>
-      <h1>Total Employees Table</h1>
       <InteractiveTable
         count={count}
         countKey={countKey}

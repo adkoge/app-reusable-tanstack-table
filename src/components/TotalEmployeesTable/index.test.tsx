@@ -9,7 +9,6 @@ describe("Table Component", () => {
     expect(screen.getByText("My View")).toBeInTheDocument();
     expect(screen.getByText("Admin View")).toBeInTheDocument();
     expect(screen.getByText("Company View")).toBeInTheDocument();
-    expect(screen.getByText(/Total Employees/)).toBeInTheDocument();
   });
 
   it("initially sets the view level to 'My View'", () => {
