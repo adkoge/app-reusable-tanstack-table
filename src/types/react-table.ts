@@ -125,3 +125,18 @@ export interface TableSearchProps {
   value: string;
   onChange: (value: string) => void;
 }
+
+export interface EmployeeData {
+  employeeName: string;
+  employeeId: number;
+  department: string;
+  jobTitle: string;
+  performanceRating: number;
+  projectsCompleted: number;
+  hoursWorkedThisMonth: number;
+  lastPromotionDate: string;
+}
+
+export interface FuzzyFilterMeta {
+  itemRank: boolean;
+}
