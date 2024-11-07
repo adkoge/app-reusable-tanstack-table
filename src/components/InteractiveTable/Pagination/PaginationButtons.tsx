@@ -1,4 +1,3 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import CaretDoubleRightIcon from "../../../icons/CaretDoubleRightIcon";
 import CaretDoubleLeftIcon from "../../../icons/CaretDoubleLeftIcon";
 import CaretLeftIcon from "../../../icons/CaretLeftIcon";
@@ -136,7 +135,7 @@ export default function InteractiveTablePagination({
               className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
               <span className="sr-only">First</span>
-              <ChevronLeftIcon aria-hidden="true" className="h-5 w-5" />
+              <CaretLeftIcon aria-hidden="true" />
             </button>
             <button
               onClick={handlePreviousGroup}
@@ -162,7 +161,7 @@ export default function InteractiveTablePagination({
               className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
               <span className="sr-only">Last</span>
-              <ChevronRightIcon aria-hidden="true" className="h-5 w-5" />
+              <CaretRightIcon aria-hidden="true" />
             </button>
           </nav>
         </div>
