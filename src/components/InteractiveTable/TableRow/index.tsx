@@ -15,7 +15,7 @@ const TableRow = <TData,>({ row }: TableRowProps<TData>) => {
             })}
             style={{
               width: cell.column.getSize(),
-              textAlign: meta.textAlign || "inherit",
+              textAlign: meta?.textAlign || "inherit",
             }}
           >
             {flexRender(cell.column.columnDef.cell, cell.getContext())}

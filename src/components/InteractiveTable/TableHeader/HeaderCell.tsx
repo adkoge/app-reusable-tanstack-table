@@ -7,8 +7,8 @@ import { ColumnMetaOptions, HeaderCellProps } from "../../../types/react-table";
 const getCellMeta = <TData,>(header: Header<TData, unknown>) => {
   const meta: ColumnMetaOptions = header.column.columnDef.meta || {};
   return {
-    flexJustify: meta.flexJustify || "inherit",
-    textAlign: meta.textAlign || "inherit",
+    flexJustify: meta?.flexJustify || "inherit",
+    textAlign: meta?.textAlign || "inherit",
   };
 };
 
