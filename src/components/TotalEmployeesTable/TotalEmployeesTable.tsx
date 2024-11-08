@@ -105,7 +105,7 @@ const TotalEmployeesTable = ({
     initialState: {
       sorting: [
         {
-          id: "performanceRating",
+          id: "hoursWorkedThisMonth",
           desc: true,
         },
       ],
