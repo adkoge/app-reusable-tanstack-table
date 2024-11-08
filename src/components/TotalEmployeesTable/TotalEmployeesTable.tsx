@@ -3,12 +3,23 @@ import InteractiveTable from "../InteractiveTable";
 import Search from "../InteractiveTable/Search";
 import useTotalEmployeesColumnConfig from "./useTotalEmployeesColumnConfig";
 import useTotalEmployees from "./useTotalEmployees";
-import { dataView, userView as userViewMode } from "../../config/viewModes";
+import {
+  dataView as dataViewMode,
+  userView as userViewMode,
+} from "../../config/viewModes";
 import { Option, EmployeeData } from "../../types/react-table";
 import { ColumnFilter } from "@tanstack/react-table";
 import { renderTitle } from "../InteractiveTable/tableHelpers";
 
-const TotalEmployeesTable = ({ userView = userViewMode.ME }) => {
+type TotalEmployeesTableProps = {
+  dataView: string;
+  userView: string;
+};
+
+const TotalEmployeesTable = ({
+  dataView = dataViewMode.TABLE,
+  userView = userViewMode.ME,
+}: TotalEmployeesTableProps) => {
   // Data Fetching
   const { data, count, options } = useTotalEmployees({ viewLevel: userView });
 
@@ -47,7 +58,7 @@ const TotalEmployeesTable = ({ userView = userViewMode.ME }) => {
 
   const [pagination, setPagination] = useState({
     pageIndex: 0,
-    pageSize: dataView.LIST ? 50 : 10,
+    pageSize: dataView === dataViewMode.LIST ? 50 : 10,
     pageCount: 0,
   });
 
@@ -123,32 +134,28 @@ const TotalEmployeesTable = ({ userView = userViewMode.ME }) => {
     showSelect: true,
   };
 
-  const pageSize = pagination.pageSize ?? 10;
   const tooltipText = "Total number of employees";
 
   return (
-    <div>
-      <InteractiveTable
-        count={count}
-        countKey={countKey}
-        countTitle="Total Hours Worked"
-        customConfiguration={customConfiguration}
-        enableSearch
-        footerInfo={null}
-        globalFilter={globalFilter}
-        handleColumnFilterChange={handleSelectChange}
-        handleGlobalFilterChange={setGlobalFilter}
-        icon={null}
-        paginationConfig={pagination}
-        pageSize={pageSize}
-        selectConfig={selectConfig}
-        TableSearch={(props) => <Search {...props} debounce={300} />}
-        tableView="table"
-        title={renderTitle(userView)}
-        tooltipText={tooltipText}
-        viewLevel={userView}
-      />
-    </div>
+    <InteractiveTable
+      count={count}
+      countKey={countKey}
+      countTitle="Total Hours Worked"
+      customConfiguration={customConfiguration}
+      enableSearch
+      footerInfo={null}
+      globalFilter={globalFilter}
+      handleColumnFilterChange={handleSelectChange}
+      handleGlobalFilterChange={setGlobalFilter}
+      icon={null}
+      paginationConfig={pagination}
+      selectConfig={selectConfig}
+      TableSearch={(props) => <Search {...props} debounce={300} />}
+      tableView="table"
+      title={renderTitle(userView)}
+      tooltipText={tooltipText}
+      viewLevel={userView}
+    />
   );
 };
 
