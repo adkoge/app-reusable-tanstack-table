@@ -7,7 +7,11 @@ import {
   dataView as dataViewMode,
   userView as userViewMode,
 } from "../../config/viewModes";
-import { Option, EmployeeData } from "../../types/react-table";
+import {
+  Option,
+  EmployeeData,
+  TableSearchProps,
+} from "../../types/react-table";
 import { ColumnFilter } from "@tanstack/react-table";
 import { renderTitle } from "../InteractiveTable/tableHelpers";
 
@@ -124,7 +128,10 @@ const TotalEmployeesTable = ({
     },
   };
 
-  if (!data || !columns) return null;
+  const MemoizedTableSearch = useMemo(
+    () => (props: TableSearchProps) => <Search {...props} debounce={300} />,
+    []
+  );
 
   const selectConfig = {
     handleSelectChange: handleSelectChange,
@@ -135,6 +142,8 @@ const TotalEmployeesTable = ({
   };
 
   const tooltipText = "Total number of employees";
+
+  if (!data || !columns) return null;
 
   return (
     <InteractiveTable
@@ -150,7 +159,7 @@ const TotalEmployeesTable = ({
       icon={null}
       paginationConfig={pagination}
       selectConfig={selectConfig}
-      TableSearch={(props) => <Search {...props} debounce={300} />}
+      TableSearch={MemoizedTableSearch}
       tableView="table"
       title={renderTitle(userView)}
       tooltipText={tooltipText}
