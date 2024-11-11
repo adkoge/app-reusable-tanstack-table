@@ -65,15 +65,16 @@ export default function InteractiveTablePagination({
 
   return (
     <div className="flex justify-center">
-      <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-        <div className="flex flex-1 justify-between sm:hidden">
+      <div className="flex flex-wrap items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+        {/* Mobile Pagination Controls */}
+        <div className="flex flex-1 flex-wrap justify-center gap-2 sm:hidden">
           <button
             onClick={onFirstPageClick}
             disabled={!getCanPreviousPage}
-            className={`relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 ${
+            className={`relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium ${
               !getCanPreviousPage
                 ? "cursor-not-allowed text-gray-300"
-                : "text-blue-500"
+                : "text-blue-500 hover:bg-gray-50"
             }`}
           >
             <CaretDoubleLeftIcon
@@ -83,10 +84,10 @@ export default function InteractiveTablePagination({
           <button
             onClick={onPreviousPageClick}
             disabled={!getCanPreviousPage}
-            className={`ml-3 relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 ${
+            className={`relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium ${
               !getCanPreviousPage
                 ? "cursor-not-allowed text-gray-300"
-                : "text-blue-500"
+                : "text-blue-500 hover:bg-gray-50"
             }`}
           >
             <CaretLeftIcon
@@ -97,10 +98,10 @@ export default function InteractiveTablePagination({
           <button
             onClick={onNextPageClick}
             disabled={!getCanNextPage}
-            className={`ml-3 relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 ${
+            className={`relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium ${
               !getCanNextPage
                 ? "cursor-not-allowed text-gray-300"
-                : "text-gray-900"
+                : "text-gray-900 hover:bg-gray-50"
             }`}
           >
             <CaretRightIcon
@@ -111,10 +112,10 @@ export default function InteractiveTablePagination({
           <button
             onClick={onLastPageClick}
             disabled={!getCanNextPage}
-            className={`ml-3 relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 ${
+            className={`relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium ${
               !getCanNextPage
                 ? "cursor-not-allowed text-gray-300"
-                : "text-gray-900"
+                : "text-gray-900 hover:bg-gray-50"
             }`}
           >
             <CaretDoubleRightIcon
@@ -123,6 +124,7 @@ export default function InteractiveTablePagination({
           </button>
         </div>
 
+        {/* Desktop Pagination Controls */}
         <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
           <nav
             aria-label="Pagination"
@@ -140,7 +142,7 @@ export default function InteractiveTablePagination({
             <button
               onClick={handlePreviousGroup}
               disabled={startPage === 1}
-              className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
+              className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
               Previous
             </button>
@@ -150,7 +152,7 @@ export default function InteractiveTablePagination({
             <button
               onClick={handleNextGroup}
               disabled={endPage === pageCount}
-              className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
+              className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
               Next
             </button>
