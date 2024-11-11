@@ -1,12 +1,29 @@
 import { useEffect, useState } from "react";
 import { employeeData } from "./data";
-import { userView as userViewMode } from "../../config/viewModes";
+// import { userView as userViewMode } from "../../config/viewModes";
 
-const useTotalEmployees = ({ viewLevel = userViewMode.ME }) => {
+// const useTotalEmployees = ({ viewLevel = userViewMode.ME }) => {
+const useTotalEmployees = () => {
   const [totalEmployeesCount, setTotalEmployeesCount] = useState(0);
   const [departmentOptions, setDepartmentOptions] = useState<
     { label: string; value: string }[]
   >([]);
+
+  // let query = "";
+
+  // switch (viewLevel) {
+  //   case userViewMode.ME:
+  //     query = "MY_QUERY";
+  //     break;
+  //   case userViewMode.COMPANY:
+  //     query = "COMPANY_QUERY";
+  //     break;
+  //   case userViewMode.ADMIN:
+  //     query = "ADMIN_QUERY";
+  //     break;
+  //   default:
+  //     query = "MY_QUERY";
+  // }
 
   useEffect(() => {
     if (employeeData.length === 0) return;
@@ -31,30 +48,13 @@ const useTotalEmployees = ({ viewLevel = userViewMode.ME }) => {
     setTotalEmployeesCount(uniqueEmployeeIds.size);
   }, []);
 
+  // Replace with actual API query in the future
+
   return {
     data: employeeData,
     count: totalEmployeesCount,
     options: departmentOptions,
   };
-
-  // Replace with actual API query in the future
-  // let query = "";
-
-  // switch (viewType) {
-  //   case userView.ME:
-  //     query = "MY_PROPERTIES_QUERY";
-  //     break;
-  //   case userView.COMPANY:
-  //     query = "COMPANY_PROPERTIES_QUERY";
-  //     break;
-  //   case userView.ADMIN:
-  //     query = "ADMIN_PROPERTIES_QUERY";
-  //     break;
-  //   default:
-  //     query = "MY_PROPERTIES_QUERY";
-  // }
-
-  // Static data return for now
 };
 
 export default useTotalEmployees;

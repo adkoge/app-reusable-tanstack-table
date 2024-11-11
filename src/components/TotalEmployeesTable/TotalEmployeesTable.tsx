@@ -25,7 +25,7 @@ const TotalEmployeesTable = ({
   userView = userViewMode.ME,
 }: TotalEmployeesTableProps) => {
   // Data Fetching
-  const { data, count, options } = useTotalEmployees({ viewLevel: userView });
+  const { data, count, options } = useTotalEmployees();
 
   // Table Config
   const countKey = "hoursWorkedThisMonth";
