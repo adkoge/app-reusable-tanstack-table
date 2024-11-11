@@ -6,8 +6,8 @@ export default function App() {
   const [version, setVersion] = useState("v1");
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="flex space-x-4 mb-4">
+    <div className="min-h-screen bg-gray-100 p-4 sm:p-6">
+      <div className="flex flex-wrap gap-4 mb-4">
         <button
           onClick={() => setVersion("v1")}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
