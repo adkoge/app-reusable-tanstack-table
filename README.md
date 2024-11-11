@@ -19,7 +19,7 @@ Recently, I worked on a project that required a robust, adaptable table setup ac
 
 ### Prerequisites
 
-- **Node.js** and **npm** installed on your machine.
+- **Docker** installed on your machine.
 
 ### Installation
 
@@ -31,28 +31,36 @@ Recently, I worked on a project that required a robust, adaptable table setup ac
    ```bash
    cd project-directory
    ```
-3. Install dependencies:
+
+### Running the Project with Docker
+
+1. Build and run the Docker container:
+
    ```bash
-   npm install
+   docker-compose up --build
    ```
 
-### Running the Project
+   This will build the Docker image and start the container, running the app in development mode.
 
-To run the project locally:
+2. Open your browser and visit `http://localhost:5173` to view the app.
+
+### Stopping the Project
+
+To stop the project, use:
 
 ```bash
-npm run dev
+docker-compose down
 ```
-
-Visit `http://localhost:5173` to view the app.
 
 ### Building for Production
 
-To build the project for production:
+To build the project for production, you can run:
 
 ```bash
-npm run build
+docker-compose run app npm run build
 ```
+
+This will create a production build within the Docker container.
 
 ## Customization
 
